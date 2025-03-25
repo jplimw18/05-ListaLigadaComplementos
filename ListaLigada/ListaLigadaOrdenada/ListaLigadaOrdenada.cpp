@@ -125,29 +125,114 @@ void inserirElemento()
 	cin >> novo->valor;
 	novo->prox = NULL;
 
+
 	if (primeiro == NULL)
 	{
 		primeiro = novo;
+		return;
+	}
+	// procura o final da lista
+	NO* aux = primeiro;
+
+	if (novo->valor < aux->valor)
+	{
+		primeiro = novo;
+		novo->prox = aux;
+	}
+	else if (novo->valor != aux->valor) {
+		bool stop = false;
+		while (!stop) {
+			if (aux->prox == NULL)
+			{
+				aux->prox = novo;
+				stop = !stop;
+			}
+			else if (novo->valor > aux->prox->valor)
+			{
+				aux = aux->prox;
+			}
+			else if (novo->valor == aux->prox->valor)
+			{
+				cout << "este numero ja existe na lista!" << endl;
+				stop = !stop;
+			}
+			else
+			{
+				NO* temp = aux->prox;
+				aux->prox = novo;
+				novo->prox = temp;
+
+				stop = !stop;
+			}
+		}
 	}
 	else
 	{
-		// procura o final da lista
-		NO* aux = primeiro;
-		while (aux->prox != NULL) {
-			aux = aux->prox;
-		}
-		aux->prox = novo;
+		cout << "este numero ja existe na lista!" << endl;
 	}
 }
 
 void excluirElemento()
 {
+	int valDelete = 0;
+	cout << "Elemento para excluir: ";
+	cin >> valDelete;
+
+
+	if (primeiro == NULL)
+	{
+		cout << "Lista vazia." << endl;
+		return;
+	}
+
+	if (valDelete < primeiro->valor)
+	{
+		cout << "Elemento nao existe na lista." << endl;
+		return;
+	}
+	
+	NO* aux = primeiro;
+	bool _delete = false;
 
 }
 
 void buscarElemento()
 {
+	int valBusca = 0;
+	cout << "Insira o elemento: ";
+	cin >> valBusca;
 
+
+	if (primeiro == NULL)
+	{
+		cout << "Lista vazia." << endl;
+		return;
+	}
+
+	if (valBusca < primeiro->valor)
+	{
+		cout << "elemento nao existe na lista." << endl;
+		return;
+	}
+
+	NO* aux = primeiro;
+	bool find = false;
+
+	while (aux != NULL && !find) {
+		if (valBusca > aux->valor) {
+			aux = aux->prox;
+		}
+		else
+		{
+			cout << "Elemento encontrado!" << endl;
+			find = !find;
+		}
+	}
+
+	if (!find) 
+	{
+		cout << "elemento nao existe na lista." << endl;
+	}
 }
 
 

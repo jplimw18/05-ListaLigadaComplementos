@@ -8,6 +8,7 @@ struct NO {
 };
 
 NO* primeiro = NULL;
+NO* ultimo = NULL;
 
 // headers
 void menu();
@@ -79,6 +80,7 @@ void inicializar()
 	}
 
 	primeiro = NULL;
+	ultimo = NULL;
 	cout << "Lista inicializada \n";
 
 }
@@ -117,6 +119,7 @@ void inserirElemento()
 	NO* novo = (NO*)malloc(sizeof(NO));
 	if (novo == NULL)
 	{
+		cout << "erro ao criar nodo." << endl << endl;
 		return;
 	}
 
@@ -127,21 +130,20 @@ void inserirElemento()
 	if (primeiro == NULL)
 	{
 		primeiro = novo;
+		ultimo = novo;
 	}
 	else
 	{
 		// procura o final da lista
-		NO* aux = primeiro;
-		while (aux->prox != NULL) {
-			aux = aux->prox;
-		}
+		NO* aux = ultimo;
 		aux->prox = novo;
+		ultimo = novo;
 	}
 }
 
 void excluirElemento()
 {
-
+	
 }
 
 void buscarElemento()
