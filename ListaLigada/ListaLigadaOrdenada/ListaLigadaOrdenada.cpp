@@ -192,8 +192,37 @@ void excluirElemento()
 	}
 	
 	NO* aux = primeiro;
+
+	if (aux->valor == valDelete)
+	{
+		primeiro = aux->prox;
+		free(aux);
+
+		return;
+	}
+
 	bool _delete = false;
 
+	do
+	{
+		if (valDelete > aux->prox->valor)
+		{
+			aux = aux->prox;
+		}
+		else
+		{
+			NO* temp = aux->prox->prox;
+			free(aux->prox);
+			aux->prox = temp;
+
+			_delete = !_delete;
+		}
+	} while (!_delete && aux != NULL && aux->prox != NULL);
+
+	if (!_delete)
+	{
+		cout << "o elemento nao foi encontrado" << endl << endl;
+	}
 }
 
 void buscarElemento()
